@@ -1,0 +1,87 @@
+<html>
+<head>
+  <title>Bootstrapping a Device</title>
+</head>
+<body>
+  <h1>Bootstrapping a Device</h1>
+
+  <h2>Architectural Overview</h2>
+
+  <p>The EyeHub service is made up of a number of different types of objects.  The IoT Model Diagram.pdf shows how they all inter-relate, but we'll look at a few of the key ones here:</p>
+
+  <dl>
+    <dt>Device</dt><dd>These are the sensors or actuators which feed data in from the real world, or signal out to the real world.</dd>
+    <dt>Person</dt><dd>Person objects represent the people interacting with the system.</dd>
+    <dt>Location</dt><dd>These represent fixed physical locations in the real world.</dd>
+    <dt>Event</dt><dd>Events provide the way for information to flow between Devices, Persons and Locations.</dd>
+  </dl>
+
+  <p>Device, Person and Location objects have associated respective Manager objects, which are used to group and administer collections of those objects.</p>
+
+  <p>For the full API documentation, see the TSB_IoT_EyeHub_ServiceAPI_v1.0.pdf file.</p>
+
+  <h2>Registering Your Device</h2>
+
+  <p>The first step in hooking a device up to EyeHub is to register it with the system.</p>
+
+  <p>While you can do this programmatically, the easiest way for your first device is to register it manually through your web browser.</p>
+  <ol>
+  <li>Log into the <a href="https://config28.flexeye.com">EyeHub website</a>.</li>
+  <li>In the top menu bar, click on "Devices".</li>
+  <li>Choose the Device Manager that your Device will live under. Unless you know that your device will live in an existing Device Manager, you should create a new Device Manager for your devices:
+    <ol>
+      <li>Click the "Add New Device Manager" button at the bottom of the left column.</li>
+      <li>Enter the ID for your new Device Manager, and click the "Submit" button.  The Device Manager lets you group Devices together logically, so choose an ID that either reflects that, or otherwise one that shows it is where all <em>your</em> Devices will live.</li>
+      <li>Click on the new Device Manager in the list on the left.  You'll get an empty list of Devices on the right-hand side.</li>
+    </ol></li>
+  <li>At the bottom of the right-hand column, click "Add New Device".</li>
+  <li>Enter the details for your Device:
+    <dl>
+      <dt>Device ID</dt><dd>The ID for your your device.</dd>
+      <dt>Name</dt><dd>A human-readable name for this Device.</dd>
+      <dt>Type</dt><dd>Choose "Sensor" if it only has a single sensor, otherwise "Multi-Sensor".</dd>
+      <dt>Description</dt><dd>A human-readable description for the device.</dd>
+    </dl></li>
+  <li>Click "Submit" to create the Device.  You should see it appear in the list of devices in the right-hand column of the screen.</li>
+  </ol>
+
+  <h2>Exploring The Devices With <code>curl</code></h2>
+
+  <p>All of the API calls use basic authentication to verify that you have the right permission to use them.  That means that usernames and passwords would be transmitted in the clear, so if you're accessing the EyeHub service across an insecure network (such as the Internet) then you should use HTTPS rather than plain HTTP. <strong>These examples assume you are on a secure network, and so use plain HTTP</strong>.</p>
+
+  <p>Before we get into accessing the API with code, we'll use the <code>curl</code> network tool to exercise it from the command line.  You might need to install <code>curl</code> first, Windows users can <a href="http://curl.haxx.se/download.html">find it here</a>, for other systems it tends to be available from your software package manager.</p>
+
+  <p>We'll start by getting the state of the newly created Device, just to prove that it exists and we can access it from outside the web browser.  In a terminal or command prompt window run the following command:</p>
+
+  <p><code>curl -u &lt;YOUR USERNAME&gt; https://config28.flexeye.com/v1/iot_Default/dms/&lt;YOUR DEVICE MANAGER ID&gt;/devices/&lt;YOUR DEVICE ID&gt;</code></p>
+
+  <p>You will be prompted to enter your password, and then (assuming all goes to plan) you should see a chunk of JSON-formatted data printed out, with the details of the Device you created earlier.</p>
+
+  <p>That call is a simple GET request, to retrieve the data about the Device.  We can make a similar call to get a list of all the events for the Device:
+
+  <p><code>curl -u &lt;YOUR USERNAME&gt; https://config28.flexeye.com/v1/iot_Default/dms/&lt;YOUR DEVICE MANAGER ID&gt;/devices/&lt;YOUR DEVICE ID&gt;/events</code></p>
+
+  <p>If you try that now, you'll likely get an empty set of results.  We can fix that by generating an event:</p>
+
+  <p><code>curl -u &lt;YOUR USERNAME&gt; --data-binary '{ "source":"test_sensor", "payload":"123", "type":"1.0", "id":"MCQN_Test1" }' -H 'Content-Type: application/json' https://config28.flexeye.com/v1/iot_Default/dms/&lt;YOUR DEVICE MANAGER ID&gt;/devices/&lt;YOUR DEVICE ID&gt;/events</code></p>
+
+  <p>That passes a number of parameters, formatted as JSON - the string following the <code>--data-binary</code> parameter - into a POST request to the Device's events URL.  Because we're sending data formatted as JSON we need to tell the EyeHub server, which is what happens with the <code>-H</code> parameter.</p>
+
+  <p>If all goes well you should get a chunk of detailed JSON data in response, containing all of the information about the Event that you just created.</p>
+
+  <h2>Talking to the API from Ruby or Python</h2>
+
+  <p>We have some example scripts to show how to call the API in two of the more popular scripting languages: Ruby and Python.</p>
+
+  <p>To use the Ruby scripts, you'll need to have the <code>json</code> gem installed.  If you don't have it already, it should be easy to install with <code>gem install json</code>.</p>
+
+  <p>To use the Python scripts, you'll need the <code>requests</code> module installed.  If you don't already have it, it should be easy to install with <code>pip install requests</code></p>
+
+  <h2>Hardware Hacking with Arduino</h2>
+
+  <p>For Arduino-hackers, we have example sketches which will generate events in the system.  At present the event details are hard-coded, but that can be modified for whatever data you are gathering.  The <code>ArduinoEthernet_GenerateEventExample</code> sketch is, predictably, for use with an Arduino Ethernet board or an Arduino with an Ethernet shield.  The <code>Hera200_GenerateEventExample</code> is for the custom Hera 200 hardware board developed by EyeHub partner Eseye.</p>
+
+  <p>Both of these sketches use the <a href="https://github.com/amcewen/HttpClient">HttpClient</a> library, which you'll need to install.  To do that you should copy the <code>HttpClient</code> folder into a <code>libraries</code> folder in your Arduino Sketchbook folder.  If you're unsure of where that is located you can find out by looking in the File -&gt; Preferences menu in the Arduino IDE.  Once you have copied it across you will need to restart the Arduino IDE so that it finds the new library.</p>
+
+</body>
+</html>
