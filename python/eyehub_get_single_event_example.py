@@ -7,11 +7,11 @@ from requests.auth import HTTPBasicAuth
 import json
 
 # Change these to match your account and device details
-EYEHUB_USERNAME="YOUR_EYEHUB_USERNAME"
-EYEHUB_PASSWORD="YOUR_EYEHUB_PASSWORD"
-DEVICE_MANAGER_ID="YOUR_DEVICE_MANAGER_ID"
-DEVICE_ID="YOUR_DEVICE_ID"
-EVENT_ID="YOUR_EVENT_ID"
+EYEHUB_USERNAME="orders2008@sheerman-chase.org.uk"
+EYEHUB_PASSWORD="testtim"
+DEVICE_MANAGER_ID="CCSR_DM"
+DEVICE_ID="TimBB"
+EVENT_ID="38446"
 
 print "Retrieving event %s..." % (EVENT_ID,)
 
@@ -23,7 +23,8 @@ response = requests.get(url, auth=(EYEHUB_USERNAME, EYEHUB_PASSWORD))
 if response.status_code == 200:
     # Load response content into a dict from json
     response_data = json.loads(response.content)
-    print response_data['payload']
+    for k in response_data:
+		print k, response_data[k]
 else:
     print response.status_code
     print response
