@@ -7,10 +7,10 @@ from requests.auth import HTTPBasicAuth
 import json
 
 # Change these to match your account and device details
-EYEHUB_USERNAME="orders2008@sheerman-chase.org.uk"
-EYEHUB_PASSWORD="testtim"
-DEVICE_MANAGER_ID="CCSR_DM"
-DEVICE_ID="TimBB"
+EYEHUB_USERNAME="YOUR_EYEHUB_USERNAME"
+EYEHUB_PASSWORD="YOUR_EYEHUB_PASSWORD"
+DEVICE_MANAGER_ID="DEVICE_MANAGER_ID_FOR_DEVICE_IN_DEVICE_ID"
+DEVICE_ID="YOUR_DEVICE_ID"
 
 print "Retrieving a list of events..."
 
@@ -28,3 +28,4 @@ if response.status_code == 200:
 else:
     print response.status_code
     print response
+

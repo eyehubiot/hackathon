@@ -11,7 +11,6 @@ EYEHUB_USERNAME="YOUR_EYEHUB_USERNAME"
 EYEHUB_PASSWORD="YOUR_EYEHUB_PASSWORD"
 DEVICE_MANAGER_ID="YOUR_DEVICE_MANAGER_ID"
 DEVICE_ID="YOUR_DEVICE_ID"
-EVENT_ID="YOUR_EVENT_ID"
 
 # First off, let's get the basic info for the device
 print "Get basic device info for %s" % DEVICE_ID
@@ -31,3 +30,4 @@ if response.status_code == 200:
 else:
     print response.status_code
     print response
+
