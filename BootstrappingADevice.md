@@ -55,7 +55,7 @@ That call is a simple GET request, to retrieve the data about the Device.  We ca
 
 If you try that now, you'll likely get an empty set of results.  We can fix that by generating an event:
 
-    curl -u <YOUR USERNAME> --data-binary '{ "source":"test_sensor", "payload":"123", "type":"1.0", "id":"MCQN_Test1" }' -H 'Content-Type: application/json' https://config28.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
+    curl -u <YOUR USERNAME> -X POST -d "{\"payload\":\"123\", \"type\":\"1.0\", \"id\":\"MCQN_Test1\" }" -H "Content-Type: application/json" https://config28.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
 
 That passes a number of parameters, formatted as JSON - the string following the `--data-binary` parameter - into a POST request to the Device's events URL.  Because we're sending data formatted as JSON we need to tell the EyeHub server, which is what happens with the `-H` parameter.
 
@@ -71,6 +71,6 @@ To use the Python scripts, you'll need the `requests` module installed.  If you 
 
 ## Hardware Hacking with Arduino
 
-For Arduino-hackers, we have example sketches which will generate events in the system.  At present the event details are hard-coded, but that can be modified for whatever data you are gathering.  The `ArduinoEthernet_GenerateEventExample` sketch is, predictably, for use with an Arduino Ethernet board or an Arduino with an Ethernet shield.  The `Hera200_GenerateEventExample` is for the custom Hera 200 hardware board developed by EyeHub partner Eseye.
+For Arduino-hackers, we have example sketches which will generate events in the system.  At present the event details are hard-coded, but that can be modified for whatever data you are gathering.  The `ArduinoEthernet_GenerateEventExample` sketch is, predictably, for use with an Arduino Ethernet board or an Arduino with an Ethernet shield.  The `Hera200_GenerateEventExample` is for the custom Hera 200 hardware board developed by EyeHub partner Eseye.  The hackathon repository also holds the [Hera 200 schematic](Hera 200 schematic.pdf)
 
 Both of these sketches use the [HttpClient](https://github.com/amcewen/HttpClient) library, which you'll need to install.  To do that you should copy the `HttpClient` folder into a `libraries` folder in your Arduino Sketchbook folder.  If you're unsure of where that is located you can find out by looking in the File -> Preferences menu in the Arduino IDE.  Once you have copied it across you will need to restart the Arduino IDE so that it finds the new library.
