@@ -55,7 +55,7 @@ That call is a simple GET request, to retrieve the data about the Device.  We ca
 
 If you try that now, you'll likely get an empty set of results.  We can fix that by generating an event:
 
-    curl -u <YOUR USERNAME> --data-binary '{ "source":"test_sensor", "payload":"123", "type":"1.0", "id":"MCQN_Test1" }' -H 'Content-Type: application/json' https://config28.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
+    curl -u <YOUR USERNAME> -X POST -d "{\"payload\":\"123\", \"type\":\"1.0\", \"id\":\"MCQN_Test1\" }" -H "Content-Type: application/json" https://config28.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
 
 That passes a number of parameters, formatted as JSON - the string following the `--data-binary` parameter - into a POST request to the Device's events URL.  Because we're sending data formatted as JSON we need to tell the EyeHub server, which is what happens with the `-H` parameter.
 
