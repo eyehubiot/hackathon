@@ -1,14 +1,14 @@
 (1) GET
-curl -G -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" http://config28.flexeye.com/v1/iot_Default/Xs
+curl -G -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" https://hub.flexeye.com/v1/iot_Default/Xs
 -------------
 RESPONSE:-
 -------------
 {
   "Xs" : [ {
-    "uri" : "http://config28.flexeye.com/v1/iot_Default/Xs/x_member_1",
+    "uri" : "https://hub.flexeye.com/v1/iot_Default/Xs/x_member_1",
     "key" : "x_member_1"
   }, {
-    "uri" : "http://config28.flexeye.com/v1/iot_Default/Xs/x_member_2",
+    "uri" : "https://hub.flexeye.com/v1/iot_Default/Xs/x_member_2",
     "key" : "x_member_2"
   } ],
   "XsCursor" : {
@@ -22,37 +22,37 @@ RESPONSE:-
 
 
 (2) POST
-curl -X POST -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" -d "{\"id\":\"x_member_4\",\"desc\":\"description for x_member_4\",\"xRef\":\"x_member_1\"}" http://config28.flexeye.com/v1/iot_Default/Xs
+curl -X POST -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" -d "{\"id\":\"x_member_4\",\"desc\":\"description for x_member_4\",\"xRef\":\"x_member_1\"}" https://hub.flexeye.com/v1/iot_Default/Xs
 -------------
 RESPONSE:-
 -------------
 {
   "id" : "x_member_4",
   "xRef" : {
-    "uri" : "http://config28.flexeye.com/v1/iot_Default/Xs/x_member_4/xRef"
+    "uri" : "https://hub.flexeye.com/v1/iot_Default/Xs/x_member_4/xRef"
   },
   "desc" : "description for x_member_4",
-  "uri" : "http://config28.flexeye.com/v1/iot_Default/Xs/x_member_4"
+  "uri" : "https://hub.flexeye.com/v1/iot_Default/Xs/x_member_4"
 }
 
 
 (3) PUT
-curl -X PUT -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" -d "{\"desc\":\"updating description for x_member_1 to this\"}" http://config28.flexeye.com/v1/iot_Default/Xs/x_member_1
+curl -X PUT -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" -d "{\"desc\":\"updating description for x_member_1 to this\"}" https://hub.flexeye.com/v1/iot_Default/Xs/x_member_1
 -------------
 RESPONSE:-
 -------------
 {
   "id" : "x_member_1",
   "xRef" : {
-    "uri" : "http://config28.flexeye.com/v1/iot_Default/Xs/x_member_4/xRef"
+    "uri" : "https://hub.flexeye.com/v1/iot_Default/Xs/x_member_4/xRef"
   },
   "desc" : "updating description for x_member_1 to this",
-  "uri" : "http://config28.flexeye.com/v1/iot_Default/Xs/x_member_1"
+  "uri" : "https://hub.flexeye.com/v1/iot_Default/Xs/x_member_1"
 }
 
 (4) DELETE
 
-curl -X DELETE -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" http://config28.flexeye.com/v1/iot_Default/Xs/x_member_1
+curl -X DELETE -H "Accept: application/json" -H "Accept-Charset: UTF-8" -H "Authorization: Basic dGVzdDE6dGVzdDE=" -H "Content-Type: application/json;charset=UTF-8" https://hub.flexeye.com/v1/iot_Default/Xs/x_member_1
 -------------
 RESPONSE:-
 -------------
