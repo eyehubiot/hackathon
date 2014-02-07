@@ -13,7 +13,7 @@ The EyeHub service is made up of a number of different types of objects.  The [I
 
 Device, Person and Location objects have associated respective Manager objects, which are used to group and administer collections of those objects.
 
-For the full API documentation, see the [TSB_IoT_EyeHub_ServiceAPI.pdf](TSB_IoT_EyeHub_ServiceAPI.pdf) file.
+For the full API documentation, see the [TSB_IoT_EyeHub_ServiceAPI_ver2.2.pdf](TSB_IoT_EyeHub_ServiceAPI_ver2.2.pdf) file.
 
 ## Registering Your Device
 
@@ -21,7 +21,7 @@ The first step in hooking a device up to EyeHub is to register it with the syste
 
 While you can do this programmatically, the easiest way for your first device is to register it manually through your web browser.
 
-1. Log into the [EyeHub website](https://config28.flexeye.com).
+1. Log into the [EyeHub website](https://hub.flexeye.com).
 1. In the top menu bar, click on "Devices".
 1. Choose the Device Manager that your Device will live under. Unless you know that your device will live in an existing Device Manager, you should create a new Device Manager for your devices:
     1. Click the "Add New Device Manager" button at the bottom of the left column.
