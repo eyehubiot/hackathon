@@ -45,17 +45,17 @@ Before we get into accessing the API with code, we'll use the `curl` network too
 
 We'll start by getting the state of the newly created Device, just to prove that it exists and we can access it from outside the web browser.  In a terminal or command prompt window run the following command:
 
-    curl -u <YOUR USERNAME> https://config28.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>
+    curl -u <YOUR USERNAME> https://hub.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>
 
 You will be prompted to enter your password, and then (assuming all goes to plan) you should see a chunk of JSON-formatted data printed out, with the details of the Device you created earlier.
 
 That call is a simple GET request, to retrieve the data about the Device.  We can make a similar call to get a list of all the events for the Device:
 
-    curl -u <YOUR USERNAME> https://config28.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
+    curl -u <YOUR USERNAME> https://hub.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
 
 If you try that now, you'll likely get an empty set of results.  We can fix that by generating an event:
 
-    curl -u <YOUR USERNAME> -X POST -d "{\"payload\":\"123\", \"type\":\"1.0\", \"id\":\"MCQN_Test1\" }" -H "Content-Type: application/json" https://config28.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
+    curl -u <YOUR USERNAME> -X POST -d "{\"payload\":\"123\", \"type\":\"1.0\", \"id\":\"MCQN_Test1\" }" -H "Content-Type: application/json" https://hub.flexeye.com/v1/iot_Default/dms/<YOUR DEVICE MANAGER ID>/devices/<YOUR DEVICE ID>/events
 
 That passes a number of parameters, formatted as JSON - the string following the `--data-binary` parameter - into a POST request to the Device's events URL.  Because we're sending data formatted as JSON we need to tell the EyeHub server, which is what happens with the `-H` parameter.
 
