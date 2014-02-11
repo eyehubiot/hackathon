@@ -8,6 +8,7 @@ The EyeHub service is made up of a number of different types of objects.  The [I
   <dt>Device</dt><dd>These are the sensors or actuators which feed data in from the real world, or signal out to the real world.</dd>
   <dt>Person</dt><dd>Person objects represent the people interacting with the system.</dd>
   <dt>Location</dt><dd>These represent fixed physical locations in the real world.</dd>
+  <dt>Application</dt><dd>Application represents the application integrated with the Hub in the real world.</dd>
   <dt>Event</dt><dd>Events provide the way for information to flow between Devices, Persons and Locations.</dd>
 </dl>
 
